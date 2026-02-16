@@ -1,6 +1,5 @@
-# Вставь сюда вывод команд из Ubuntu:
-
-# 1) git --version
-# 2) uname -a
-# 3) ssh -T git@github.com
-# 4) git remote -v
+git version 2.43.0
+Linux Test-VM 6.8.0-100-generic #100-Ubuntu SMP PREEMPT_DYNAMIC Tue Jan 13 16:40:06 UTC 2026 x86_64 x86_64 x86_64 GNU/Linux
+Hi Linnet-Zeitnot! You've successfully authenticated, but GitHub does not provide shell access.
+origin	git@github.com:Linnet-Zeitnot/git-admin-practice-test.git (fetch)
+origin	git@github.com:Linnet-Zeitnot/git-admin-practice-test.git (push)

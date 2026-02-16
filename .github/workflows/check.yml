@@ -1,0 +1,59 @@
+name: Git Practice Check
+
+on:
+  push:
+    branches: [ "main", "master" ]
+  workflow_dispatch:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout (full history + all branches)
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Fetch all branches
+        run: git fetch --all --prune
+
+      - name: Check required files exist
+        run: |
+          set -e
+          test -f README.md
+          test -f proof/windows.txt
+          test -f proof/ubuntu.txt
+
+      - name: Check commit messages exist
+        run: |
+          set -e
+          git log --pretty=format:"%s" | grep -Fxq "initial commit (windows)"
+          git log --pretty=format:"%s" | grep -Fxq "feature change (windows)"
+          git log --pretty=format:"%s" | grep -Fxq "feature change (ubuntu)"
+          git log --pretty=format:"%s" | grep -Fxq "merge ubuntu into main"
+
+      - name: Check branches exist
+        run: |
+          set -e
+          git branch -a | grep -q "feature-windows"
+          git branch -a | grep -q "feature-ubuntu"
+
+      - name: Check student token in README
+        run: |
+          set -e
+          if [ -z "${{ vars.STUDENT_TOKEN }}" ]; then
+            echo "STUDENT_TOKEN variable not set."
+            exit 1
+          fi
+          grep -Fq "${{ vars.STUDENT_TOKEN }}" README.md
+
+      - name: Generate completion code
+        if: success()
+        run: |
+          CODE=$(printf "%s:%s:%s" "${GITHUB_REPOSITORY}" "${GITHUB_SHA}" "${{ vars.STUDENT_TOKEN }}" | sha256sum | awk '{print $1}' | cut -c1-12)
+          echo "## Completed" >> "$GITHUB_STEP_SUMMARY"
+          echo "" >> "$GITHUB_STEP_SUMMARY"
+          echo "**Teachbase code:** \`TB-${CODE}\`" >> "$GITHUB_STEP_SUMMARY"
+          echo "" >> "$GITHUB_STEP_SUMMARY"
+          echo "Copy this code into Teachbase."

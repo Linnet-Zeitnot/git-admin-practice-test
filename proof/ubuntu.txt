@@ -1,0 +1,6 @@
+# Вставь сюда вывод команд из Ubuntu:
+
+# 1) git --version
+# 2) uname -a
+# 3) ssh -T git@github.com
+# 4) git remote -v

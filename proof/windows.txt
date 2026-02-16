@@ -1,0 +1,5 @@
+# Вставь сюда вывод команд из Windows:
+
+# 1) git --version
+# 2) where git
+# 3) git config --list

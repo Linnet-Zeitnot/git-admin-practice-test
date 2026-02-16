@@ -1,3 +1,4 @@
+STUDENT_TOKEN: TOKEN-Linnet-Zeitnot
 
 # git-admin-practice-template
 # Практика Git
@@ -60,4 +61,3 @@ TB-XXXXXXXXXXXX
 
 Если Actions красный — задание не засчитывается.
 
-STUDENT_TOKEN: TOKEN-Linnet-Zeitnot
